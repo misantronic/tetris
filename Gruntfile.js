@@ -14,12 +14,27 @@ module.exports = function(grunt) {
 					'dist/game.min.js' : ['src/game.js']
 				}
 			}
+		},
+
+		concat: {
+			options: {
+				separator: ""
+			},
+
+			all: {
+				src: [
+					'./dist/bricks.min.js',
+					'./dist/game.min.js'
+				],
+				dest: './dist/tetris.js'
+			}
 		}
 	});
 
 	// load tasks
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-concat');
 
 	// tasks
-	grunt.registerTask('default', ['uglify']);
+	grunt.registerTask('default', ['uglify', 'concat']);
 };

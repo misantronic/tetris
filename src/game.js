@@ -5,7 +5,7 @@ i = 0;					// brick index
 g = [];					// grid in the time of the interval
 G = []; 				// overall grid
 L = "length";
-I = setInterval(function(o, c, bb, x, y, by, bx) {
+I = setInterval(function(o, c, bb, x, y, by, bx, R, r) {
 	if(!b[i]) i=0;
 
 	bb = b[i];
@@ -20,7 +20,9 @@ I = setInterval(function(o, c, bb, x, y, by, bx) {
 	}
 
 	// draw brick
+	R = {};
 	for (y = 0; y < 24; y++) {
+		R[y] = 1;
 		for (x = 0; x < 30; x++) {
 			if(x == P.x && y == P.y) {
 				for (by = 0; by < bb[L]; by++) {
@@ -32,8 +34,11 @@ I = setInterval(function(o, c, bb, x, y, by, bx) {
 					}
 				}
 			}
+			if(!g[y][x]) delete R[y];
 		}
 	}
+
+
 
 	// draw html
 	o = "";
@@ -52,6 +57,14 @@ I = setInterval(function(o, c, bb, x, y, by, bx) {
 		b = B[M[f](M[f](M.random() * (7)))];
 		P.x = 12;
 		P.y = i = 0;
+		G = g.slice(0);
+	}
+
+	// complete rows
+	for(r in R) {
+		for (y = r; y > 0; y--) {
+			g[y] = g[y-1] ? g[y-1] : [];
+		}
 		G = g.slice(0);
 	}
 }, 100);

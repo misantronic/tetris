@@ -27,10 +27,12 @@ I = setInterval(function(o, c, bb, x, y, by, bx, R, r) {
 			if(x == P.x && y == P.y) {
 				for (by = 0; by < bb[L]; by++) {
 					for (bx = 0; bx < bb[by][L]; bx++) {
-						g[y+by][x+bx] = bb[by][bx];
+						if(bb[by][bx]) {
+							g[y+by][x+bx] = bb[by][bx];
 
-						// check collision
-						if(G[y+by+1] && G[y+by+1][x+bx]) c = 1
+							// check collision
+							if(G[y+by+1] && G[y+by+1][x+bx]) c = 1
+						}
 					}
 				}
 			}

@@ -57,7 +57,7 @@ I = setInterval(function(o, c, bb, x, y, by, bx, R, r) {
 
 	if(P.y + bb[L] == 31 || c) {
 		b = B[M[f](M[f](M.random() * (7)))];
-		P.x = 12;
+		P.x = 8;
 		P.y = i = 0;
 		G = g.slice(0);
 	}

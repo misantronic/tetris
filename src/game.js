@@ -1,6 +1,6 @@
 // brick setup
 b = B[(M = Math)[f="floor"](M[f](M.random() * 7))];
-P = { x: 12, y: 0};		// brick position
+P = { x: 8, y: 0};		// brick position
 i = 0;					// brick index
 g = [];					// grid in the time of the interval
 G = []; 				// overall grid
@@ -11,19 +11,19 @@ I = setInterval(function(o, c, bb, x, y, by, bx, R, r) {
 	bb = b[i];
 
 	// draw grid
-	for (y = 0; y < 24; y++) {
+	for (y = 0; y < 30; y++) {
 		g[y] = [];
 		if(!G[y]) G[y] = [];
-		for (x = 0; x < 30; x++) {
+		for (x = 0; x < 17; x++) {
 			g[y][x] = G[y][x];
 		}
 	}
 
 	// draw brick
 	R = {};
-	for (y = 0; y < 24; y++) {
+	for (y = 0; y < 30; y++) {
 		R[y] = 1;
-		for (x = 0; x < 30; x++) {
+		for (x = 0; x < 17; x++) {
 			if(x == P.x && y == P.y) {
 				for (by = 0; by < bb[L]; by++) {
 					for (bx = 0; bx < bb[by][L]; bx++) {
@@ -44,9 +44,9 @@ I = setInterval(function(o, c, bb, x, y, by, bx, R, r) {
 
 	// draw html
 	o = "";
-	for (y = 0; y < 24; y++) {
-		for (x = 0; x < 30; x++) {
-			o += g[y][x] ? "X" : " "
+	for (y = 0; y < 30; y++) {
+		for (x = 0; x < 17; x++) {
+			o += g[y][x] ? "<b></b>" : "<i></i>"
 		}
 		o += "\n";
 	}
@@ -55,7 +55,7 @@ I = setInterval(function(o, c, bb, x, y, by, bx, R, r) {
 
 	P.y++;
 
-	if(P.y + bb[L] == 25 || c) {
+	if(P.y + bb[L] == 31 || c) {
 		b = B[M[f](M[f](M.random() * (7)))];
 		P.x = 12;
 		P.y = i = 0;

@@ -5,10 +5,10 @@ i = 0;					// brick index
 g = [];					// grid in the time of the interval
 G = []; 				// overall grid
 L = "length";
-I = setInterval(function(o, c, bb, x, y, by, bx, R, r) {
+I = setInterval(function(hit) {
 	if(!b[i]) i=0;
 
-	bb = b[i];
+	F = b[i]; // current brick
 
 	// draw grid
 	for (y = 0; y < 30; y++) {
@@ -20,23 +20,23 @@ I = setInterval(function(o, c, bb, x, y, by, bx, R, r) {
 	}
 
 	// draw brick
-	R = {};
+	H = {};
 	for (y = 0; y < 30; y++) {
-		R[y] = 1;
+		H[y] = 1;
 		for (x = 0; x < 17; x++) {
 			if(x == P.x && y == P.y) {
-				for (by = 0; by < bb[L]; by++) {
-					for (bx = 0; bx < bb[by][L]; bx++) {
-						if(bb[by][bx]) {
-							g[y+by][x+bx] = bb[by][bx];
+				for (j = 0; j < F[L]; j++) {
+					for (k = 0; k < F[j][L]; k++) {
+						if(F[j][k]) {
+							g[y+j][x+k] = F[j][k];
 
 							// check collision
-							if(G[y+by+1] && G[y+by+1][x+bx]) c = 1
+							if(G[y+j+1] && G[y+j+1][x+k]) hit = 1
 						}
 					}
 				}
 			}
-			if(!g[y][x]) delete R[y];
+			if(!g[y][x]) delete H[y];
 		}
 	}
 
@@ -55,7 +55,7 @@ I = setInterval(function(o, c, bb, x, y, by, bx, R, r) {
 
 	P.y++;
 
-	if(P.y + bb[L] == 31 || c) {
+	if(P.y + F[L] == 31 || hit) {
 		b = B[M[f](M[f](M.random() * (7)))];
 		P.x = 8;
 		P.y = i = 0;
@@ -63,7 +63,7 @@ I = setInterval(function(o, c, bb, x, y, by, bx, R, r) {
 	}
 
 	// complete rows
-	for(r in R) {
+	for(r in H) {
 		for (y = r; y > 0; y--) {
 			g[y] = g[y-1] ? g[y-1] : [];
 		}

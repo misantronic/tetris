@@ -6,8 +6,6 @@ g = [];					// grid in the time of the interval
 G = []; 				// overall grid
 L = "length";
 I = setInterval(function(hit) {
-	if(!b[i]) i=0;
-
 	F = b[i]; // current brick
 
 	// draw grid
@@ -20,7 +18,7 @@ I = setInterval(function(hit) {
 	}
 
 	// draw brick
-	H = {};
+	H = {}; // hit map
 	for (y = 0; y < 30; y++) {
 		H[y] = 1;
 		for (x = 0; x < 17; x++) {
@@ -78,4 +76,5 @@ onkeydown = function(e, x) {
 
 	// move brick
 	x == 39 ? P.x++ : x == 37 ? P.x-- : x == 38 && i++;
+	if(!b[i])i=0;
 };
